@@ -1,10 +1,12 @@
 ---
 title: Collaborating with maintainers using discussions
 shortTitle: Collaborating with maintainers
-intro: 'You can contribute to the goals, plans, health, and community for a project on {% data variables.product.product_name %} by communicating with the maintainers of the project in a discussion.'
+intro: 'You can contribute to the goals, plans, health, and community for a project on {% data variables.product.github %} by communicating with the maintainers of the project in a discussion.'
 permissions: 'People with read access to a repository can start and participate in discussions and polls in the repository. People with read access to the source repository for organization discussions can start and participate in discussions and polls in the organization. {% data reusables.enterprise-accounts.emu-permission-interact %}'
 versions:
-  feature: discussions
+  fpt: '*'
+  ghes: '*'
+  ghec: '*'
 ---
 
 
@@ -25,6 +27,12 @@ As your project grows, you can grant higher access permissions to active members
 Community members can upvote discussions and top-level comments inside discussions to communicate with maintainers about ideas that matter to them. Project maintainers can then sort discussions and comments based on upvotes to gain insight into what community members value.
 
 For more information about participation in discussions, see [AUTOTITLE](/discussions/collaborating-with-your-community-using-discussions/participating-in-a-discussion).
+
+{% ifversion copilot %}
+
+> [!TIP] You can also use {% data variables.product.prodname_copilot_chat_short %} to generate ideas, outlines, or drafts for discussions, based on your pull requests and issues. See [AUTOTITLE](/copilot/copilot-chat-cookbook/documenting-code/writing-discussions-or-blog-posts).
+
+{% endif %}
 
 ## Prerequisites
 

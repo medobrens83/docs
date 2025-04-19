@@ -33,7 +33,6 @@ $ ghe-announce -u
 > Removed the announcement message
 ```
 
-{% ifversion ghe-announce-dismiss %}
 To allow each user to dismiss the announcement for themselves, use the `-d` flag.
 
 ```shell
@@ -46,9 +45,7 @@ $ ghe-announce -u
 > dismissible: MESSAGE
 ```
 
-{% endif %}
-
-You can also set an announcement banner using the enterprise settings on {% data variables.product.product_name %}. For more information, see [AUTOTITLE](/admin/user-management/managing-users-in-your-enterprise/customizing-user-messages-for-your-enterprise#creating-a-global-announcement-banner).
+You can also set an announcement banner using the enterprise settings on {% data variables.product.prodname_ghe_server %}. For more information, see [AUTOTITLE](/admin/user-management/managing-users-in-your-enterprise/customizing-user-messages-for-your-enterprise#creating-a-global-announcement-banner).
 
 <!--For earlier releases of GHES, see the previous service `ghe-resque-info`-->
 
@@ -137,7 +134,7 @@ $ ghe-config app.github.rate-limiting-exempt-users "hubot github-actions[bot]"
 
 ### ghe-config-apply
 
-This utility applies {% data variables.enterprise.management_console %} settings, reloads system services, prepares a storage device, reloads application services, and runs any pending database migrations. It is equivalent to clicking **Save settings** in the {% data variables.enterprise.management_console %}'s web UI or to sending a POST request to {% ifversion management-console-manage-ghes-parity %}[the `/manage/v1/config/apply` endpoint](/rest/enterprise-admin/manage-ghes#trigger-a-ghe-config-apply-run){% else %}[the `/setup/api/configure` endpoint](/rest/enterprise-admin/management-console){% endif %}.
+This utility applies {% data variables.enterprise.management_console %} settings, reloads system services, prepares a storage device, reloads application services, and runs any pending database migrations. It is equivalent to clicking **Save settings** in the {% data variables.enterprise.management_console %}'s web UI or to sending a POST request to {% ifversion management-console-manage-ghes-parity %}[the `/manage/v1/config/apply` endpoint](/rest/enterprise-admin/manage-ghes#trigger-a-ghe-config-apply-run){% else %}[the `/setup/api/configure` endpoint](/rest/enterprise-admin/management-console){% endif %}. {% ifversion ghes > 3.15 %} Starting in version 3.16, this utility applies configuration changes conditionally to relevant settings. You can force it to run unconditionally by using `-f` flag. {% endif %}
 
 ```shell
 ghe-config-apply
@@ -282,13 +279,18 @@ ghe-org-admin-promote -a
 
 ### ghe-reactivate-admin-login
 
-Use this command to immediately unlock the {% data variables.enterprise.management_console %} after {% ifversion enterprise-authentication-rate-limits %}an account lockout. To configure authentication policies for {% data variables.location.product_location %}, see [AUTOTITLE](/admin/configuration/configuring-your-enterprise/configuring-rate-limits#configuring-authentication-policy-rate-limits).{% else %}10 failed login attempts in the span of 10 minutes.{% endif %}
+Use this command to immediately unlock the {% data variables.enterprise.management_console %} after an account lockout. To configure authentication policies for {% data variables.location.product_location %}, see [AUTOTITLE](/admin/configuration/configuring-your-enterprise/configuring-rate-limits#configuring-authentication-policy-rate-limits).
 
 ```shell
 ghe-reactivate-admin-login
 ```
 
 ### ghe-saml-mapping-csv
+
+{% ifversion scim-for-ghes-ga %}
+> [!NOTE]
+> This utility does not work with configurations that use SAML with SCIM provisioning. For the SCIM version of this tool, please refer to [`ghe-scim-identities-csv` utility](#ghe-scim-identities-csv).
+{% endif %}
 
 This utility allows administrators to output or update the SAML `NameID` mappings for users on an instance. The utility can output a CSV file that lists all existing mappings. You can also update mappings for users on your instance by editing the resulting file, then using the utility to assign new mappings from the file.
 
@@ -313,6 +315,31 @@ To update SAML mappings on the instance with new values from the file, run the f
 ```shell
 ghe-saml-mapping-csv -u -f /PATH/TO/FILE
 ```
+
+{% ifversion scim-for-ghes-ga %}
+
+### ghe-scim-identities-csv
+
+> [!NOTE]
+> This utility only works with configurations that use SAML with SCIM provisioning. For the SAML only version of this tool, please refer to the [`ghe-saml-mapping-csv` utility](#ghe-saml-mapping-csv).
+
+This utility allows administrators to output the SCIM identities for users on an instance. The utility can output a CSV file that lists all existing identities and the groups they are members of.
+
+To output CSV data containing a list of all user SCIM identities on the instance, run the following command. This will create a file located at `/data/user/tmp/scim-identities-DATE.csv` containing your SCIM identities.
+
+```shell
+ghe-scim-identities-csv
+```
+
+Or, if you'd like to specify the file, run the following command.
+
+```shell
+ghe-scim-identities-csv -f /PATH/TO/FILE
+```
+
+We recommend writing to a file in `/data/user/tmp`.
+
+{% endif %}
 
 ### ghe-service-list
 
@@ -376,7 +403,7 @@ inactive
 
 ### ghe-set-password
 
-This utility allows you to set a new {% ifversion enterprise-management-console-multi-user-auth %}root site administrator {% endif %}password for authentication to the {% data variables.enterprise.management_console %}. For more information, see [AUTOTITLE](/admin/administering-your-instance/administering-your-instance-from-the-web-ui/managing-access-to-the-management-console).
+This utility allows you to set a new root site administrator password for authentication to the {% data variables.enterprise.management_console %}. For more information, see [AUTOTITLE](/admin/administering-your-instance/administering-your-instance-from-the-web-ui/managing-access-to-the-management-console).
 
 ```shell
 ghe-set-password
@@ -546,6 +573,16 @@ This utility returns webhook delivery logs for administrators to review and iden
 ghe-webhook-logs
 ```
 
+To show all hook deliveries filtered by a given event:
+
+```shell
+ghe-webhook-logs --event issues
+```
+
+To show all hook deliveries filtered by a given event and action:
+
+```shell
+ghe-webhook-logs --event issues.opened
 To show all failed hook deliveries in the past day:
 
 ```shell
@@ -561,8 +598,6 @@ ghe-webhook-logs -g DELIVERY_GUID
 ```
 
 ## Clustering
-
-{% ifversion cluster-rebalancing %}
 
 ### ghe-cluster-balance
 
@@ -608,8 +643,6 @@ To display a short description of the utility and any valid subcommands:
 ghe-cluster-balance help
 ```
 
-{% endif %}
-
 ### ghe-cluster-maintenance
 
 With the `ghe-cluster-maintenance` utility, you can set or unset maintenance mode for every node in a cluster.
@@ -621,12 +654,10 @@ $ ghe-cluster-maintenance -q
 # Queries the current mode
 $ ghe-cluster-maintenance -s
 # Sets maintenance mode
-{%- ifversion custom-maintenance-mode-message %}
 $ ghe-cluster-maintenance -s "MESSAGE"
 # Sets maintenance mode with a custom message
 $ ghe-cluster-maintenance -m "MESSAGE"
 # Updates the custom message
-{%- endif %}
 $ ghe-cluster-maintenance -u
 # Unsets maintenance mode
 ```
@@ -674,7 +705,7 @@ ssh -p 122 admin@HOSTNAME -- 'ghe-cluster-support-bundle -o' > cluster-support-b
 To create a standard bundle including data from the last 2 days:
 
 ```shell
-ssh -p 122 admin@HOSTNAME -- "ghe-cluster-support-bundle -p {% ifversion bundle-cli-syntax-no-quotes %}2days {% endif %} -o" > support-bundle.tgz
+ssh -p 122 admin@HOSTNAME -- "ghe-cluster-support-bundle -p 2days -o" > support-bundle.tgz
 ```
 
 To create an extended bundle including data from the last 8 days:
@@ -797,8 +828,6 @@ Flag | Description
 
 {% endif %}
 
-{% ifversion ghe-spokes-deprecation-phase-1 %}
-
 ### ghe-spokesctl
 
 This utility allows you to manage replication of repositories on the distributed Git servers.
@@ -819,36 +848,6 @@ To evacuate storage services on a cluster node:
 ghe-spokesctl server set evacuating git-server-UUID
 ```
 
-{% else %}
-
-### ghe-spokes
-
-This utility allows you to manage the three copies of each repository on the distributed Git servers.
-
-```shell
-ghe-spokes
-```
-
-To show a summary of repository location and health:
-
-```shell
-ghe-spokes status
-```
-
-To show the servers in which the repository is stored:
-
-```shell
-ghe-spokes route
-```
-
-To evacuate storage services on a cluster node:
-
-```shell
-ghe-spokes server evacuate git-server-UUID
-```
-
-{% endif %}
-
 ### ghe-storage
 
 This utility allows you to evacuate all storage services before evacuating a cluster node.
@@ -856,8 +855,6 @@ This utility allows you to evacuate all storage services before evacuating a clu
 ```shell
 ghe-storage evacuate storage-server-UUID
 ```
-
-{% ifversion node-eligibility-service %}
 
 ### nes
 
@@ -912,8 +909,6 @@ To manually update a node's eligibility for re-addition to the cluster:
 ```shell
 nes set-node-eligibility eligible HOSTNAME
 ```
-
-{% endif %}
 
 ## Git
 
@@ -990,12 +985,8 @@ This utility tests the blob storage configuration for {% data variables.product.
 
 For more information about the configuration of {% data variables.product.prodname_actions %}, see [AUTOTITLE](/admin/github-actions/getting-started-with-github-actions-for-your-enterprise/getting-started-with-github-actions-for-github-enterprise-server).
 
-{% ifversion ghes-actions-storage-oidc %}
-
 > [!NOTE]
 > This utility only works with configurations that use a credentials-based connection to the storage provider. To test OpenID Connect (OIDC) configurations, use [`ghe-actions-test-storage-with-oidc`](#ghe-actions-test-storage-with-oidc).
-
-{% endif %}
 
 ```shell
 ghe-actions-precheck -p [PROVIDER] -cs ["CONNECTION-STRING"]
@@ -1007,8 +998,6 @@ If your storage system is configured correctly, you'll see the following output.
 All Storage tests passed
 ```
 
-{% ifversion ghes-actions-storage-oidc %}
-
 ### ghe-actions-test-storage-with-oidc
 
 This utility checks that the blob storage provider for {% data variables.product.prodname_actions %} on {% data variables.location.product_location %} is valid when OpenID Connect (OIDC) is used.
@@ -1019,8 +1008,6 @@ This utility checks that the blob storage provider for {% data variables.product
 ```shell
 ghe-actions-test-storage-with-oidc -p [PROVIDER] -cs ["CONNECTION-STRING"]
 ```
-
-{% endif %}
 
 ### ghe-actions-stop
 
@@ -1295,7 +1282,7 @@ ssh -p 122 admin@HOSTNAME -- 'ghe-support-bundle -o' > support-bundle.tgz
 To create a standard bundle including data from the last 2 days:
 
 ```shell
-ssh -p 122 admin@HOSTNAME -- "ghe-support-bundle -p {% ifversion bundle-cli-syntax-no-quotes %}2days {% endif %} -o" > support-bundle.tgz
+ssh -p 122 admin@HOSTNAME -- "ghe-support-bundle -p 2days -o" > support-bundle.tgz
 ```
 
 To create an extended bundle including data from the last 8 days:
@@ -1336,26 +1323,13 @@ In this example, `ghe-repl-status -vv` sends verbose status information from a r
 
 ## Upgrading {% data variables.product.prodname_ghe_server %}
 
-{% ifversion ghes-upgrade-complete-indicator %}
-
 ### ghe-check-background-upgrade-jobs
 
 During an upgrade to a feature release, this utility displays the status of background jobs on {% data variables.location.product_location %}. If you're running back-to-back upgrades, you should use this utility to check that all background jobs are complete before proceeding with the next upgrade.
 
-{% ifversion ghes < 3.12 %}
-
-> [!NOTE]
-> To use `ghe-check-background-upgrade-jobs` with {% data variables.product.product_name %} {{ allVersions[currentVersion].currentRelease }}, your instance must run version {{ allVersions[currentVersion].currentRelease }}.{% ifversion ghes = 3.10 %}4{% elsif ghes = 3.11 %}1{% endif %} or later.
-
-{% endif %}
-
 ```shell
 ghe-check-background-upgrade-jobs
 ```
-
-{% endif %}
-
-{% ifversion ghe-migrations-cli-utility %}
 
 ### ghe-migrations
 
@@ -1378,8 +1352,6 @@ By default, the visualizer refreshes every second. To specify the duration in se
 ```shell
 ghe-migrations -refresh_rate SECONDS
 ```
-
-{% endif %}
 
 ### ghe-update-check
 

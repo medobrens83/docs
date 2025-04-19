@@ -34,7 +34,7 @@ We recommend always using a `www` subdomain, even if you also use an apex domain
 
 ## Using a custom domain across multiple repositories
 
-If you set a custom domain for a user or organization site, by default, the same custom domain will be used for all project sites owned by the same account. For more information about site types, see [AUTOTITLE](/pages/getting-started-with-github-pages/about-github-pages#types-of-github-pages-sites).
+If you set a custom domain for a user or organization site, by default, the same custom domain will be used for all project sites owned by the same account. For more information about site types, see [AUTOTITLE](/pages/getting-started-with-github-pages/what-is-github-pages#types-of-github-pages-sites).
 
 For example, if the custom domain for your user site is `www.octocat.com`, and you have a project site with no custom domain configured that is published from a repository called `octo-project`, the {% data variables.product.prodname_pages %} site for that repository will be available at `www.octocat.com/octo-project`.
 
@@ -55,7 +55,7 @@ Subdomains are configured with a `CNAME` record through your DNS provider. For m
 
 A `www` subdomain is the most commonly used type of subdomain. For example, `www.example.com` includes a `www` subdomain.
 
-`www` subdomains are the most stable type of custom domain because `www` subdomains are not affected by changes to the IP addresses of {% data variables.product.product_name %}'s servers.
+`www` subdomains are the most stable type of custom domain because `www` subdomains are not affected by changes to the IP addresses of {% data variables.product.github %}'s servers.
 
 ### Custom subdomains
 

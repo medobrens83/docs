@@ -44,13 +44,13 @@ Content exclusion can be configured at the repository{% ifversion ghec %}, organ
 
 ## Error: "{% data variables.product.prodname_copilot %} could not connect to server. Extension activation failed"
 
-This error indicates that you do not have a {% data variables.product.prodname_copilot %} subscription, or there was an error connecting to the {% data variables.product.prodname_dotcom %} API to request a token to use {% data variables.product.prodname_copilot %}.
+This error indicates that you do not have a {% data variables.product.prodname_copilot_short %} plan, or there was an error connecting to the {% data variables.product.prodname_dotcom %} API to request a token to use {% data variables.product.prodname_copilot %}.
 
-To request another token from api.github.com, try signing in and out of {% data variables.product.prodname_copilot %} from your IDE. Once you've logged out, {% data variables.product.prodname_copilot %} will prompt you to sign back in.
+To request another token from api.github.com, try signing in and out of {% data variables.product.prodname_copilot_short %} from your IDE. Once you've logged out, {% data variables.product.prodname_copilot_short %} will prompt you to sign back in.
 
 If you cannot connect to the server, you can create a discussion in our [discussion forum](https://github.com/orgs/community/discussions/categories/copilot). You can include log files from your IDE to help us troubleshoot the issue. For more information on obtaining log files from your specific IDE, see [AUTOTITLE](/copilot/troubleshooting-github-copilot/viewing-logs-for-github-copilot-in-your-environment).
 
-## {% data variables.product.prodname_copilot %} not suggesting multiple lines of code
+## {% data variables.product.prodname_copilot_short %} not suggesting multiple lines of code
 
 This is a known issue and our team is working towards a fix. For more information, see this comment on a [{% data variables.product.prodname_github_community %} discussion](https://github.com/orgs/community/discussions/40522#discussioncomment-4701470).
 
@@ -59,6 +59,16 @@ This is a known issue and our team is working towards a fix. For more informatio
 This error suggests that a classic or fine-grained {% data variables.product.pat_generic %} might be in use, either via the `GITHUB_TOKEN` or `GH_TOKEN` environment variables, or during a `gh auth login` attempt. {% data variables.product.prodname_copilot_cli %} currently only supports using the {% data variables.product.prodname_cli %} OAuth app.
 
 For more information, see the [{% data variables.product.prodname_copilot_cli_short %} extension repository](https://github.com/github/gh-copilot).
+
+## Error: "Sorry, your request was rate-limited."
+
+This error suggests that you have exceeded the rate limit for {% data variables.product.prodname_copilot_short %} requests. {% data variables.product.github %} uses rate limits to ensure everyone has fair access to the {% data variables.product.prodname_copilot_short %}  service and to protect against abuse.
+
+Most people see rate limiting for preview models, like OpenAI’s o1 and o3-mini, which are rate-limited due to limited capacity.
+
+Service-level request rate limits ensure high service quality for all {% data variables.product.prodname_copilot_short %}  users and should not affect typical or even deeply engaged {% data variables.product.prodname_copilot_short %} usage. We are aware of some use cases that are affected by it. {% data variables.product.github %} is iterating on {% data variables.product.prodname_copilot_short %}’s rate-limiting heuristics to ensure it doesn’t block legitimate use cases.
+
+In case you experience repeated rate-limiting in {% data variables.product.prodname_copilot_short %}, contact {% data variables.contact.contact_support_page %}.
 
 ## Further reading
 

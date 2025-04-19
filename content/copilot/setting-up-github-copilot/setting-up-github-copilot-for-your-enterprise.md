@@ -3,7 +3,7 @@ title: 'Setting up GitHub Copilot for your enterprise'
 shortTitle: Set up for enterprise
 intro: "Follow these steps to set up {% data variables.product.prodname_copilot %} in your enterprise."
 permissions: Enterprise owners
-product: 'Enterprises with a subscription to {% data variables.product.prodname_copilot_enterprise_short %} or {% data variables.product.prodname_copilot_business_short %}'
+product: 'Enterprises with a {% data variables.product.prodname_copilot_enterprise_short %} or {% data variables.product.prodname_copilot_business_short %} plan'
 versions:
   feature: copilot-enterprise
 topics:
@@ -14,9 +14,14 @@ redirect_from:
   - /copilot/github-copilot-enterprise/overview/enabling-github-copilot-enterprise-features
 ---
 
-## 1. Subscribe your enterprise to {% data variables.product.prodname_copilot %}
+## 1. Enable {% data variables.product.prodname_copilot %} in your Enterprise through payment verification
 
-Set up a subscription to {% data variables.product.prodname_copilot_enterprise_short %} or {% data variables.product.prodname_copilot_business_short %} for your enterprise. See [AUTOTITLE](/copilot/managing-copilot/managing-copilot-for-your-enterprise/subscribing-to-copilot-for-your-enterprise).
+{% data reusables.enterprise-accounts.access-enterprise %}
+{% data reusables.enterprise-accounts.settings-tab %}
+1. Click the **{% octicon "check-circle" aria-hidden="true" %} Getting Started** tab.
+1. Under "Next steps", click **Verify your payment method**. This will enable {% data variables.product.prodname_copilot %} in your enterprise.
+
+After you've completed these steps, you will be able to confirm that {% data variables.product.prodname_copilot %} is enabled in your enterprise's **{% octicon "law" aria-hidden="true" %} Policies** tab.
 
 ## 2. Set policies
 
@@ -34,8 +39,6 @@ Enable {% data variables.product.prodname_copilot_short %} for some or all organ
 
 If your enterprise is on {% data variables.enterprise.data_residency_site %}, users must perform some additional setup to authenticate to their account from their development environment. See [AUTOTITLE](/copilot/managing-copilot/configure-personal-settings/using-github-copilot-with-an-account-on-ghecom).
 
-## 5. Share onboarding material
+## 5. Drive {% data variables.product.prodname_copilot_short %} adoption
 
-* **Share onboarding material:** Share onboarding material with each organization that you granted {% data variables.product.prodname_copilot_short %} access to. See [AUTOTITLE](/copilot/setting-up-github-copilot/setting-up-github-copilot-for-your-organization).
-* **Encourage adoption:** Encouragement from leadership can help drive adoption of {% data variables.product.prodname_copilot_short %} in your enterprise. Consider messaging your support of {% data variables.product.prodname_copilot_short %} and how it can help your enterprise.
-* **Set up training sessions or workshops:** Training sessions or workshops can help members learn how to use {% data variables.product.prodname_copilot_short %} effectively.
+Planning and implementing an effective enablement process is essential to drive adoption of {% data variables.product.prodname_copilot_short %} in your enterprise. See [AUTOTITLE](/copilot/rolling-out-github-copilot-at-scale/driving-copilot-adoption-in-your-company).

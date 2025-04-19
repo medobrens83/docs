@@ -34,14 +34,12 @@ The events listed in your security log are triggered by your actions. Actions ar
 | ------------- | ----------- |
 |  {% ifversion fpt or ghec %} |
 | `billing` | Contains all activities related to your billing information. |
-| `codespaces` | Contains all activities related to {% data variables.product.prodname_github_codespaces %}. For more information, see [AUTOTITLE](/codespaces/overview). |
+| `codespaces` | Contains all activities related to {% data variables.product.prodname_github_codespaces %}. For more information, see [AUTOTITLE](/codespaces/quickstart). |
 | `copilot` | Contains all activities related to {% data variables.product.prodname_copilot_business_short %}. For more information, see [AUTOTITLE](/copilot/about-github-copilot/what-is-github-copilot). |
 | `marketplace_agreement_signature` | Contains all activities related to signing the {% data variables.product.prodname_marketplace %} Developer Agreement. |
 | `marketplace_listing`| Contains all activities related to listing apps in {% data variables.product.prodname_marketplace %}. |
 |  {% endif %} |
-|  {% ifversion security-log-oauth-access-tokens %} |
 | `oauth_access` | Contains all activities related to OAuth access tokens. |
-|  {% endif %} |
 | `oauth_authorization` | Contains all activities related to authorizing {% data variables.product.prodname_oauth_apps %}. For more information, see [AUTOTITLE](/apps/oauth-apps/using-oauth-apps/authorizing-oauth-apps). |
 |  {% ifversion passkeys %} |
 | `passkey` | Contains activities related to your passkeys. See [AUTOTITLE](/authentication/authenticating-with-a-passkey/about-passkeys). |
@@ -51,7 +49,7 @@ The events listed in your security log are triggered by your actions. Actions ar
 |  {% endif %} |
 | `personal_access_token` | Contains activities related to {% data variables.product.pat_v2 %}s. For more information, see [AUTOTITLE](/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). |
 | `profile_picture`| Contains all activities related to your profile picture. |
-| `project` | Contains all activities related to {% data variables.projects.projects_v1_boards %}. |
+| `project` | Contains all activities related to {% data variables.projects.projects_v2 %}. |
 | `public_key` | Contains all activities related to [your public SSH keys](/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account). |
 | `repo`| Contains all activities related to the repositories you own. |
 |  {% ifversion fpt or ghec %} |

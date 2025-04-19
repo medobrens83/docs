@@ -1,6 +1,6 @@
 ---
 title: Filtering and searching issues and pull requests
-intro: 'To find detailed information about a repository on {% data variables.product.product_name %}, you can filter, sort, and search issues and pull requests that are relevant to the repository.'
+intro: 'To find detailed information about a repository on {% data variables.product.github %}, you can filter, sort, and search issues and pull requests that are relevant to the repository.'
 redirect_from:
   - /github/managing-your-work-on-github/finding-information-in-a-repository/filtering-issues-and-pull-requests-by-assignees
   - /articles/filtering-issues-and-pull-requests-by-assignees
@@ -71,18 +71,16 @@ You can filter issues and pull requests to find:
 
 ## Building advanced filters for issues
 
-{% data reusables.issues.release-stage %}
-
-You can build advanced filters using boolean and nested queries on your repository's issues page. As you type your filter, {% data variables.product.github %} will show available qualifiers, suggest values, and warn when there is a problem with your filter.
+You can build advanced filters using boolean and nested queries on your repository's issues page{% ifversion issues-dashboard %} and the issues dashboard{% endif %}. As you type your filter, {% data variables.product.github %} will show available qualifiers, suggest values, and warn when there is a problem with your filter.
 
 ### Using boolean operators
 
 You can use `AND` and `OR` operators to refine your filters.
 
-Use `AND` when you need results where both statements are true. In the example filter below, the results will be comprised of issues with the "Bug fix" label that are assigned to the @octocat user.
+Use `AND` when you need results where both statements are true. In the example filter below, the results will be comprised of issues with the "question" label that are assigned to the @octocat user.
 
 ```text
-label:"Bug fix" AND assignee:octocat
+label:"question" AND assignee:octocat
 ```
 
 To return results where either statement is true, use `OR`. In the example below, the results will contain issues assigned to either @octocat or @hubot.
@@ -91,17 +89,17 @@ To return results where either statement is true, use `OR`. In the example below
 assignee:octocat OR assignee:hubot
 ```
 
-If you choose not to use `AND` and `OR` operators, {% data variables.product.github %} will treat a space between statements as an `AND` operator unless you are using an `org`, `repo`, or `user` field to filter by ownership where any spaces will be treated as an `OR` operator.
+If you choose not to use `AND` and `OR` operators, {% data variables.product.github %} will treat a space between statements as an `AND` operator{% ifversion ghes < 3.18 %} unless you are using an `org`, `repo`, or `user` field to filter by ownership, in which case any spaces will be treated as an `OR` operator{% endif %}.
 
 ### Using parentheses for more complicated filters
 
-You can also use parentheses to nest filters and group qualifiers. In the example below, the results will contain issues that are either assigned to @octocat with the "bug" issue type or assigned to @hubot with the "Enhancement" issue type.
+You can also use parentheses to nest filters and group qualifiers. In the example below, the results will contain issues that are either assigned to @octocat with the "bug" issue type or assigned to @hubot with the "Feature" issue type.
 
 ```text
-(type:"Bug" AND assignee:octocat) OR (type:"Enhancement" AND assignee:hubot)
+(type:"Bug" AND assignee:octocat) OR (type:"Feature" AND assignee:hubot)
 ```
 
-You can nest filters using parentheses up to five levels deep. It's not currently possible to include the `repo`, `org`, or `user` qualifiers within parentheses.
+You can nest filters using parentheses up to five levels deep.{% ifversion ghes < 3.18 %} It's not currently possible to include the `repo`, `org`, or `user` qualifiers within parentheses.{% endif %}
 
 {% endwebui %}
 
@@ -137,15 +135,13 @@ Once you've [applied labels to an issue or pull request](/issues/using-labels-an
 
 ## Filtering by issue type
 
-{% data reusables.issues.release-stage %}
-
 If your organization uses issue types, you can filter issues for a particular type. You can also type the `type:` qualifier directly into your filter.
 
 {% data reusables.repositories.navigate-to-repo %}
 {% data reusables.repositories.sidebar-issues %}
 1. Above the list of issues, select the **Types** dropdown menu.
 
-   ![Screenshot of a list of issues. In the header above the list, a dropdown menu, labeled "Types", is outlined in dark orange and the Issue Types menu is open.](/assets/images/help/issues/issue-type-dropdown.png)
+   ![Screenshot of a list of issues. In the list header, the "Types" filter is outlined in orange and expanded.](/assets/images/help/issues/issue-type-dropdown.png)
 
 1. In the list of type, click an issue type.
 
@@ -182,7 +178,7 @@ You can use filters to search for issues and pull requests that meet specific cr
 
 The issues and pull requests search bar allows you to define your own custom filters and sort by a wide variety of criteria. You can find the search bar on each repository's **Issues** and **Pull requests** tabs and on your [Issues and Pull requests dashboards](/issues/tracking-your-work-with-issues/viewing-all-of-your-issues-and-pull-requests).
 
-![Screenshot of the list of issues for a repository. Above the list, a search field, containing the query "is:issue is:open", is outlined in dark orange.](/assets/images/help/issues/issues-search-bar.png)
+![Screenshot of the list of issues for a repository. Above the list, a search field, containing the query "is:issue is:open", is outlined in orange.](/assets/images/help/issues/issues-search-bar.png)
 
 > [!TIP]
 > {% data reusables.search.search_issues_and_pull_requests_shortcut %}
@@ -226,9 +222,10 @@ With issue and pull request search terms, you can:
 
 For issues, you can also use search to:
 
-* Filter for issues that are linked to a pull request by a closing reference: `linked:pr`{% ifversion issue-close-reasons %}
-* Filter issues by the reason they were closed: `is:closed reason:completed` or `is:closed reason:"not planned"`{% endif %}
-{% ifversion issue-types %}* Filter for issues with a particular type: `is:open type:"Bug"`{% endif %}
+* Filter for issues that are linked to a pull request by a closing reference: `linked:pr`
+* Filter issues by the reason they were closed: `is:closed reason:completed` or `is:closed reason:"not planned"`
+{% ifversion issue-types %}* Filter for issues with a particular type: `is:open type:"Bug"`{% endif %}{% ifversion issues-advanced-search %}
+* Filter for issues from repositories [**owned**](/search-github/searching-on-github/searching-issues-and-pull-requests#search-within-a-users-or-organizations-repositories) by a certain user or organization, limited to up to 16 `user` and `org` qualifiers with no limit on `repo` qualifiers: `state:open type:issue org:github OR user:octocat`{% endif %}
 
 For pull requests, you can also use search to:
 

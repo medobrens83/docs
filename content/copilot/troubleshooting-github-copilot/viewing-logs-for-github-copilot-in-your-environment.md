@@ -1,7 +1,6 @@
 ---
 title: Viewing logs for GitHub Copilot in your environment
 intro: 'View logs to troubleshoot {% data variables.product.prodname_copilot %}-related errors in your IDE.'
-product: '{% data reusables.gated-features.copilot %}'
 redirect_from:
   - /copilot/troubleshooting-github-copilot/troubleshooting-github-copilot-in-visual-studio
   - /copilot/troubleshooting-github-copilot/troubleshooting-github-copilot-in-visual-studio-code
@@ -53,7 +52,7 @@ If you find the log file doesn't contain enough information to resolve an issue,
 
 1. In the menu bar, click **Help**, select **Diagnostic Tools**, and click **Debug Log Settings...**.
 
-   ![Screenshot of the menu bar in a JetBrains IDE. The "Help" menu and "Diagnostic Tools" submenu are expanded, and the "Debug Log Settings" option is highlighted in blue.](/assets/images/help/copilot/jetbrains-debug-log.png)
+   ![Screenshot of the menu bar in a JetBrains IDE. The "Help" menu and "Diagnostic Tools" submenu are expanded and "Debug Log Settings" is highlighted.](/assets/images/help/copilot/jetbrains-debug-log.png)
 
 1. In the "Custom Debug Log Configuration" window, add a new line with the following content, then click **OK**.
 

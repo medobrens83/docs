@@ -19,20 +19,14 @@ You can add a self-hosted runner to a repository, an organization, or an enterpr
 
 If you are an organization or enterprise administrator, you might want to add your self-hosted runners at the organization or enterprise level. This approach makes the runner available to multiple repositories in your organization or enterprise, and also lets you to manage your runners in one place.
 
-For information on supported operating systems for self-hosted runners, or using self-hosted runners with a proxy server, see [AUTOTITLE](/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners).
-
 > [!WARNING]
 > {% data reusables.actions.self-hosted-runner-security %}
 >
-> For more information, see [AUTOTITLE](/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners#self-hosted-runner-security-with-public-repositories).
+> For more information, see [AUTOTITLE](/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions).
 
 You can set up automation to scale the number of self-hosted runners. For more information, see [AUTOTITLE](/actions/hosting-your-own-runners/managing-self-hosted-runners/autoscaling-with-self-hosted-runners).
 
-{% ifversion actions-single-use-tokens %}
-
 You can register ephemeral runners that perform a single job before the registration is cleaned up by using just-in-time runner registration. For more information, see [AUTOTITLE](/actions/security-guides/security-hardening-for-github-actions#using-just-in-time-runners).
-
-{% endif %}
 
 ## Prerequisites
 
@@ -109,6 +103,7 @@ For more information on changing runner group access settings, see [AUTOTITLE](/
 
 ## Further reading
 
+* [AUTOTITLE](/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners)
 * [AUTOTITLE](/admin/github-actions/getting-started-with-github-actions-for-your-enterprise/getting-started-with-self-hosted-runners-for-your-enterprise)
 
 {% endif %}

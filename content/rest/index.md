@@ -46,6 +46,7 @@ children:
   - /apps
   - /billing
   - /branches
+  - /campaigns
   - /checks
   - /classroom
   - /code-scanning
@@ -75,6 +76,7 @@ children:
   - /orgs
   - /packages
   - /pages
+  - /private-registries
   - /projects
   - /pulls
   - /rate-limit

@@ -6,7 +6,7 @@ layout: inline
 versions:
   fpt: '*'
   ghec: '*'
-  ghes: '>= 3.9'
+  ghes: '*'
 type: overview
 topics:
   - Actions Runner Controller
@@ -95,13 +95,14 @@ Once the custom resources are installed, you can deploy ARC into your Kubernetes
 
 This image contains the least amount of packages necessary for the container runtime and the runner binaries. To install additional software, you can create your own runner image. You can use ARC's runner image as a base, or use the corresponding setup actions. For instance, `actions/setup-java` for Java or `actions/setup-node` for Node.
 
-You can find the definition of ARC's runner image in [this Dockerfile](https://github.com/actions/runner/blob/main/images/Dockerfile) and the definition of the base image in [this Dockerfile](https://github.com/dotnet/dotnet-docker/blob/main/src/runtime-deps/6.0/bullseye-slim/amd64/Dockerfile).
+You can find the definition of ARC's runner image in [this Dockerfile](https://github.com/actions/runner/blob/main/images/Dockerfile) and the definition of the base image in [this Dockerfile](https://github.com/dotnet/dotnet-docker/blob/main/src/runtime-deps/8.0/bookworm-slim/amd64/Dockerfile).
 
 #### Creating your own runner image
 
 You can create your own runner image that meets your requirements. Your runner image must fulfill the following conditions.
 
-* Use a base image that can run the self-hosted runner application. For more information, see [AUTOTITLE](/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners).
+* Use a base image that can run the self-hosted runner application. For more information, see [AUTOTITLE](/actions/hosting-your-own-runners/managing-self-hosted-runners).
+
 * The [runner binary](https://github.com/actions/runner/releases) must be placed under `/home/runner/` and launched using `/home/runner/run.sh`.
 * If you use Kubernetes mode, the [runner container hooks](https://github.com/actions/runner-container-hooks/releases) must be placed under `/home/runner/k8s`.
 

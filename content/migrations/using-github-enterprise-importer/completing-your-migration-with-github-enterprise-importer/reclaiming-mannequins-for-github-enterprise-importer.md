@@ -24,7 +24,7 @@ Each mannequin only has a display name, which comes from the display name in the
 
 Reclaiming is optional and can happen any time after a migration is finished. For this reason, you can allow your team to begin working in migrated repositories before reclaiming.
 
-Mannequins are not used for Git commit attribution. For more details about commit attribution, see [Managing authorship for commit commits](#managing-authorship-for-git-commits) below.
+Mannequins are not used for Git commit attribution. For more details about commit attribution, see [Managing authorship for Git commits](#managing-authorship-for-git-commits) below.
 
 ## Reclaiming mannequins
 
@@ -53,6 +53,7 @@ The exact command you need to use depends on which extension of the {% data vari
 
 * [Reclaiming mannequins with the {% data variables.product.prodname_gei_cli_short %}](#reclaiming-mannequins-with-the-gei-extension)
 * [Reclaiming mannequins with the {% data variables.product.prodname_ado2gh_cli_short %}](#reclaiming-mannequins-with-the-ado2gh-extension)
+* [Reclaiming mannequins with the {% data variables.product.prodname_bbs2gh_cli_short %}](#reclaiming-mannequins-with-the-bbs2gh-extension)
 
 #### Reclaiming mannequins with the {% data variables.product.prodname_gei_cli_short %}
 
@@ -118,6 +119,40 @@ If your migration source is Azure DevOps, you can reclaim mannequins with the {%
 
       ```shell copy
       gh ado2gh reclaim-mannequin --github-org DESTINATION --mannequin-user MANNEQUIN --target-user USERNAME
+      ```
+
+{% data reusables.enterprise-migration-tool.mannequin-reclaim-must-accept %}
+
+#### Reclaiming mannequins with the {% data variables.product.prodname_bbs2gh_cli_short %}
+
+If your migration source is Bitbucket Server, you can reclaim mannequins with the {% data variables.product.prodname_bbs2gh_cli %}.
+
+* {% data reusables.enterprise-migration-tool.add-pat-to-reclaim-mannequins %} For {% data variables.product.pat_generic %} requirements, see [AUTOTITLE](/migrations/using-github-enterprise-importer/migrating-from-bitbucket-server-to-github-enterprise-cloud/managing-access-for-a-migration-from-bitbucket-server#required-scopes-for-personal-access-tokens).
+* {% data reusables.enterprise-migration-tool.add-target-api-url %}
+
+{% data reusables.enterprise-migration-tool.create-csv-mannequins %}
+
+   * To generate a CSV file with a list of mannequins for an organization, use the `gh bbs2gh generate-mannequin-csv` command, replacing DESTINATION with the destination organization and FILENAME with a file name for the resulting CSV file.
+
+     {% data reusables.enterprise-migration-tool.include-reclaimed %}
+
+     ```shell copy
+     gh bbs2gh generate-mannequin-csv --github-org DESTINATION --output FILENAME.csv
+     ```
+
+   {% data reusables.enterprise-migration-tool.edit-csv %}
+1. To reclaim mannequins, use the `gh bbs2gh reclaim-mannequin` command.
+
+    {% data reusables.enterprise-migration-tool.reclaim-bulk-csv %}
+
+      ```shell copy
+      gh bbs2gh reclaim-mannequin --github-org DESTINATION --csv FILENAME.csv
+      ```
+
+   {% data reusables.enterprise-migration-tool.reclaim-individual-mannequin %}
+
+      ```shell copy
+      gh bbs2gh reclaim-mannequin --github-org DESTINATION --mannequin-user MANNEQUIN --target-user USERNAME
       ```
 
 {% data reusables.enterprise-migration-tool.mannequin-reclaim-must-accept %}
